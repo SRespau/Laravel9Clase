@@ -8,6 +8,8 @@ class StudyController extends Controller{
     
     public function index()
     {
+        //return $_SERVER; //Devuelve la info de $_SERVER en formato json al ponerlo en el controlador
+        //dd($_SERVER); // dd();Vuelca en contenido de una variable y para la ejecución. Es una muy buena alternativa a var_dump(). Si una variable sale null podemos ver que ocurre
         echo "Estamos en index de estudios";
     }
 
