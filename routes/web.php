@@ -32,10 +32,11 @@ Route::get("/saludo/{nombre?}", function ($nombre = "Mundo"){// El interrogante 
 
 
 //Rutas del ejercicio Study
-Route::get("/studies", [StudyController::class, "index"]); //Enrutamos el metodo index de la clase StudyController. Cuando pongamos /studies en el navegador devolveremos index
-
-Route::get("/studies/create", [StudyController::class, "create"]); //El orden importa. Si lo pongo debajo de show cogera "create" como parametro. Al ponerlo encima reservamos la palabra create solo para este método
-
-Route::get("/studies/{id}", [StudyController::class, "show"]);
-
-Route::get("/studies/{id}/edit", [StudyController::class, "edit"]);
+//Route::get("/studies", [StudyController::class, "index"]); //Enrutamos el metodo index de la clase StudyController. Cuando pongamos /studies en el navegador devolveremos index
+//Route::get("/studies/create", [StudyController::class, "create"]); //El orden importa. Si lo pongo debajo de show cogera "create" como parametro. Al ponerlo encima reservamos la palabra create solo para este método
+//Route::get("/studies/{id}", [StudyController::class, "show"]);
+//Route::get("/studies/{id}/edit", [StudyController::class, "edit"]);
+//Route::delete("/studies/{id}/destroy", [StudyController::class, "destroy"]);
+//Route::put("/studies/{id}/update", [StudyController::class, "update"]);
+//Route::post("/studies/store", [StudyController::class, "store"]);
+Route::resource("/studies",StudyController::class); //Con esto hacemos todas las rutas anteriores en una sola linea. Leerá los metodos que tenemos en la clase como rutas

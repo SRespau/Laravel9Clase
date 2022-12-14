@@ -25,4 +25,19 @@ class StudyController extends Controller{
     {
         echo "Este es el edit de estudies para modificar la id $id";
     }
+
+    public function destroy($id)
+    {
+        echo "Este es el destroy de $id";
+    }
+
+    public function update($id)
+    {
+        echo "Este es el update de estudies para modificar la id $id";
+    }
+
+    public function store()
+    {
+        echo "Este es el store de estudies";
+    }
 }
