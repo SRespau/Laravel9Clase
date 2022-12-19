@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StudyController; //Añadimos el studycontroller para enrutar los metodos de la clase
 use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\AppEjemplo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +16,7 @@ use App\Http\Controllers\PruebaController;
 |
 */
 //Ejecuta de la lista la primera que encuentre correcta, luego se sale. Si tuvieramos 2 "/hola" con cosas diferentes cogería la primera y nunca entraría a la segunda
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get("/hola", function (){
     echo "Hola mundo";
@@ -30,6 +29,23 @@ Route::get("/hola/{nombre}", function ($nombre){ //Los parametros se añade en l
 Route::get("/saludo/{nombre?}", function ($nombre = "Mundo"){// El interrogante es para decirle que si no se inserta ningún parametro en la ruta que ponga mundo. Si pone parametro que salga el parametro
     echo "Hola $nombre";
 });
+
+
+
+// RUTAS CON NOMBRE
+Route::get("/contacta-con-ies", function(){
+    return "dinos tu duda";
+})->name("contacto"); //Es como un alias. Nombramos esa ruta como contacto. Así si cambiamos la dirección no hace falta cambiarla en todos sitios. Abajo cogerá el alias y no la dirección
+
+Route::get("/informacion-asignatura", [AppEjemplo::class, "mostrarInformacion"])->name("infoasig"); //Ponemos alias y en la ruta llamamos al metodo mostrarInformación del controlador AppEjemplo
+
+Route::get('/', function () { //La página index (local) habremos puesto 3 enlaces que lleva a la ruta del Route de arriba. Enlazamos una ruta con otra
+    //return view('welcome');
+    //echo "<a href='contacta-con-ies'>Contacto 1</a><br>"; Ruta absoluta entera para acceder
+    echo "<a href='" . route('contacto') . "'>Contacto 2</a><br>"; //Para poner el alias nuevo "contacto" que le hemos añadido al route de arriba
+    echo "<a href='" . route('infoasig') . "'>Mostrar información asignatura</a><br>";
+});
+
 
 
 
@@ -59,3 +75,7 @@ Route::get("/studies/{id}", function ($id){ //Con este hacemos directamente una 
 
 //CONTROLADOR PruebaController
 Route::get("prueba2/{name}", [PruebaController::class, "saludoCompleto"]); 
+
+
+//PRUEBAS PLANTILLAS
+Route::get("pruebaPlantillas", [AppEjemplo::class, "pruebasPlantillas"]);
