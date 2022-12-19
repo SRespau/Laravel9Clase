@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudyController; //Añadimos el studycontroller para enrutar los metodos de la clase
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\AppEjemplo;
+use App\Http\Controllers\AsignaturaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,3 +80,7 @@ Route::get("prueba2/{name}", [PruebaController::class, "saludoCompleto"]);
 
 //PRUEBAS PLANTILLAS
 Route::get("pruebaPlantillas", [AppEjemplo::class, "pruebasPlantillas"]);
+
+
+//CONTROLADOR AsignaturaController
+Route::resource("/asignaturas", AsignaturaController::class);
