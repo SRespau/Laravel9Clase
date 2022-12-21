@@ -6,6 +6,8 @@ use App\Http\Controllers\StudyController; //Añadimos el studycontroller para en
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\AppEjemplo;
 use App\Http\Controllers\AsignaturaController;
+use App\Http\Controllers\VideoclubController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +20,7 @@ use App\Http\Controllers\AsignaturaController;
 */
 //Ejecuta de la lista la primera que encuentre correcta, luego se sale. Si tuvieramos 2 "/hola" con cosas diferentes cogería la primera y nunca entraría a la segunda
 
-
+/*
 Route::get("/hola", function (){
     echo "Hola mundo";
 });
@@ -30,9 +32,9 @@ Route::get("/hola/{nombre}", function ($nombre){ //Los parametros se añade en l
 Route::get("/saludo/{nombre?}", function ($nombre = "Mundo"){// El interrogante es para decirle que si no se inserta ningún parametro en la ruta que ponga mundo. Si pone parametro que salga el parametro
     echo "Hola $nombre";
 });
+*/
 
-
-
+/*
 // RUTAS CON NOMBRE
 Route::get("/contacta-con-ies", function(){
     return "dinos tu duda";
@@ -46,10 +48,10 @@ Route::get('/', function () { //La página index (local) habremos puesto 3 enlac
     echo "<a href='" . route('contacto') . "'>Contacto 2</a><br>"; //Para poner el alias nuevo "contacto" que le hemos añadido al route de arriba
     echo "<a href='" . route('infoasig') . "'>Mostrar información asignatura</a><br>";
 });
+*/
 
 
-
-
+/*
 //CONTROLADOR EJEMPLO StudiesController
 
 //Rutas del ejercicio Study
@@ -70,7 +72,7 @@ Route::get("/studies/{id}", function ($id){ //Con este hacemos directamente una 
 //Route::post("/studies/store", [StudyController::class, "store"]);
 
 //Route::resource("/studies",StudyController::class); //Con esto hacemos todas las rutas anteriores en una sola linea. Leerá los metodos que tenemos en la clase como rutas
-
+*/
 
 
 
@@ -84,3 +86,13 @@ Route::get("pruebaPlantillas", [AppEjemplo::class, "pruebasPlantillas"]);
 
 //CONTROLADOR AsignaturaController
 Route::resource("/asignaturas", AsignaturaController::class);
+
+
+//CONTROLADOR VideoclubController
+Route::get("/", [VideoclubController::class, "index"]);
+Route::get("/login", [VideoclubController::class, "login"]);
+Route::get("/logout", [VideoclubController::class, "logout"]);
+Route::get("/catalog", [VideoclubController::class, "index"]);
+Route::get("/catalog/show/{id}", [VideoclubController::class, "show"]);
+Route::get("/catalog/create", [VideoclubController::class, "create"]);
+Route::get("/catalog/edit/{id}", [VideoclubController::class, "edit"]);
