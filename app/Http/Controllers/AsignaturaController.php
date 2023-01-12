@@ -56,11 +56,11 @@ class AsignaturaController extends Controller
             "ciclo"=>["required","size:3","regex:/DA[M|W]/"] // | no es admitida en laravel en regex. Hay que usar array de opciones y además poner un size porque no coge limite de caracteres [a-z] sería un caracter, pero laravel admite varios         
         ],[ //Si creamos una segunda array podemos personalizar los errores que muestra
             "nombre.required" => "Debes rellenar el campo " . "'" . "nombre" . "'",
-            "curso.required" => "Debes rellenar el campo " . "'" . "curso" . "'",
-            "ciclo.required" => "Debes rellenar el campo " . "'" . "ciclo" . "'",
             "nombre.max" => "El campo nombre debe tener menos de 7 caracteres",
+            "curso.required" => "Debes rellenar el campo " . "'" . "curso" . "'",       
             "curso.integer" => "El campo curso debe ser un número entero",
             "curso.regex" => "El campo curso debe ser 1 o 2",
+            "ciclo.required" => "Debes rellenar el campo " . "'" . "ciclo" . "'",
             "ciclo.regex" => "El campo ciclo debe ser DAM o DAW"
         ]);
         dd($datos);

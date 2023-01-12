@@ -96,3 +96,4 @@ Route::get("/catalog", [VideoclubController::class, "index"]);
 Route::get("/catalog/show/{id}", [VideoclubController::class, "show"]);
 Route::get("/catalog/create", [VideoclubController::class, "create"]);
 Route::get("/catalog/edit/{id}", [VideoclubController::class, "edit"]);
+

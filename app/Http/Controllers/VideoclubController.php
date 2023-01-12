@@ -24,7 +24,7 @@ class VideoclubController extends Controller
      */
     public function create()
     {
-        //
+        return view("videoclubs.catalog.create");
     }
 
     /**
@@ -35,7 +35,7 @@ class VideoclubController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view("videoclubs.catalog.store");
     }
 
     /**
@@ -46,7 +46,7 @@ class VideoclubController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('catalog.catalog.show', ['id'=>$id]);
     }
 
     /**
@@ -57,7 +57,7 @@ class VideoclubController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("videoclubs.catalog.edit", ['id'=>$id]);
     }
 
     /**
@@ -69,7 +69,7 @@ class VideoclubController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return view("videoclubs.catalog.update");
     }
 
     /**
@@ -80,6 +80,6 @@ class VideoclubController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return view("videoclubs.catalog.destroy");
     }
 }

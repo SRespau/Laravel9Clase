@@ -1,5 +1,5 @@
 @extends('layouts.masterVideoclub')
 
 @section('content')
-    Pantalla principal
+    Pantalla principal Index Catalogo
 @endsection

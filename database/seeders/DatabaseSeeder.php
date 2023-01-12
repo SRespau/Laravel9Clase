@@ -20,5 +20,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        //Laravel abrirá primero este Seeder y luego los creados
+        //Llamar a los seeders creados: Añadimos esto al database original para no tener que llamarlo en el artisan con --class
+        $this->call([
+            ProductSeeder::class,
+            OrderSeeder::class,           
+        ]);
     }
 }
