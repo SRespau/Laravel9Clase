@@ -7,6 +7,12 @@ use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\AppEjemplo;
 use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\VideoclubController;
+use App\Http\Controllers\ProductController;
+
+//Prueba para cargar login de ui laravel en bootstrap
+Route::get('/', function () { 
+    return view('welcome');   
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +23,9 @@ use App\Http\Controllers\VideoclubController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+
+
+
 */
 //Ejecuta de la lista la primera que encuentre correcta, luego se sale. Si tuvieramos 2 "/hola" con cosas diferentes cogería la primera y nunca entraría a la segunda
 
@@ -75,7 +84,7 @@ Route::get("/studies/{id}", function ($id){ //Con este hacemos directamente una 
 */
 
 
-
+/*
 //CONTROLADOR PruebaController
 Route::get("prueba2/{name}", [PruebaController::class, "saludoCompleto"]); 
 
@@ -89,7 +98,7 @@ Route::resource("/asignaturas", AsignaturaController::class);
 
 
 //CONTROLADOR VideoclubController
-Route::get("/", [VideoclubController::class, "index"]);
+//Route::get("/", [VideoclubController::class, "index"]);
 Route::get("/login", [VideoclubController::class, "login"]);
 Route::get("/logout", [VideoclubController::class, "logout"]);
 Route::get("/catalog", [VideoclubController::class, "index"]);
@@ -97,3 +106,15 @@ Route::get("/catalog/show/{id}", [VideoclubController::class, "show"]);
 Route::get("/catalog/create", [VideoclubController::class, "create"]);
 Route::get("/catalog/edit/{id}", [VideoclubController::class, "edit"]);
 
+*/
+//CONTROLADOR ProductController
+Route::resource("products", ProductController::class); //Equivale a los 7 metodos
+
+
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
