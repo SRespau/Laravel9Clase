@@ -10,37 +10,40 @@
                 <p>{{$message}}</p>
             </div>
             @endif
-            <h1 style="text-align: center;">Lista de productos</h1>
+            <h1 style="text-align: center;">Lista de clientes</h1>
             <br>
 
-            <a class="btn btn-primary" href="{{route('products.create')}}">Nuevo Producto</a>
+            <a class="btn btn-primary" href="{{route('clients.create')}}">Nuevo Cliente</a>
             <br><br>
-
             <table class="table table-striped">
                 <tr style="text-align: center;">
+                    <th>DNI</th>
                     <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Descripcion</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
                     <th></th>
                     <th></th>
                     <th></th>
                 </tr>
-                @foreach($productList as $product)
+                @foreach($clientList as $client)
                 <tr>
-                    <td>{{ $product->nombre }}</td>
-                    <td>{{ $product->precio }}</td>
-                    <td>{{ $product->descripcion }}</td>
+                    <td>{{ $client->dni }}</td>
+                    <td>{{ $client->name }}</td>
+                    <td>{{ $client->surname }}</td>
+                    <td>{{ $client->phoneNumber }}</td>
+                    <td>{{ $client->email }}</td>
 
                     <td>
-                        <a class="btn btn-primary" href="{{route('products.edit', $product->id)}}">Editar</a>
+                        <a class="btn btn-primary" href="{{route('clients.edit', $client->id)}}">Editar</a>
                     </td>
 
                     <td>
-                        <a class="btn btn-primary" href="{{route('products.show', $product->id)}}">Ver</a>
+                        <a class="btn btn-primary" href="{{route('clients.show', $client->id)}}">Ver</a>
                     </td>
 
                     <td>
-                        <form action="{{route('products.destroy', $product->id)}}" method="post">
+                        <form action="{{route('clients.destroy', $client->id)}}" method="post">
                             @csrf
                             @method("DELETE")
 

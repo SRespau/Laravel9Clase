@@ -6,10 +6,10 @@
         <div class="col-md-12">
 
 
-            <h1>Editar Producto</h1>
+            <h1>Editar Cliente</h1>
             <br>
 
-            <a class="btn btn-primary" href="{{route('products.index')}}">Lista Productos</a>
+            <a class="btn btn-primary" href="{{route('clients.index')}}">Lista Clientes</a>
 
             @if($errors->any()) <!--Tratamos los errores del required en el método create (devuelve array de errores)-->
             
@@ -23,16 +23,20 @@
             </div>
             @endif
 
-            <form action="{{ route('products.update', $product->id) }}" method="POST"> <!-- Tambien puede ser como Ruta + array asociativo (mas correcto) {{ route('products.update', ['product' => $product->id ]) }}-->
+            <form action="{{ route('clients.update', $client->id) }}" method="POST"> 
                 @csrf <!--Hay que ponerlo para que no de error 404. Medida de seguridad-->
                 @method("PUT") <!--Indicamos que es metodo PUT para el edit-->
                 <br>
-                Nombre: <input type="text" name="nombre" id="nombre" value="{{ $product->nombre ?? '' }}"> <!--Operador ternario BLADE. En caso de no encontrar nombre que ponga el campo vacio ''-->
+                DNI: <input type="text" name="dni" id="dni" value="{{ $client->name ?? '' }}"> <!--Operador ternario BLADE. En caso de no encontrar nombre que ponga el campo vacio ''-->
                 <br><br>
-                Precio: <input type="text" name="precio" id="precio" value="{{ $product->precio ?? '' }}">
+                Nombre: <input type="text" name="name" id="name" value="{{ $client->name ?? '' }}"> <!--Operador ternario BLADE. En caso de no encontrar nombre que ponga el campo vacio ''-->
                 <br><br>
-                Descripción: <input type="text" name="descripcion" id="descripcion" value="{{ $product->descripcion ?? '' }}">
+                Apellidos: <input type="text" name="surname" id="surname" value="{{ $client->surname ?? '' }}">
                 <br><br>
+                Teléfono: <input type="text" name="phoneNumber" id="phoneNumber" value="{{ $client->phoneNumber ?? '' }}">
+                <br><br>
+                Email: <input type="text" name="email" id="email" value="{{ $client->email ?? '' }}">
+                <br>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
             </form>
             <br>

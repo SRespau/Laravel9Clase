@@ -4,9 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Order;
+use App\Models\Client; //Importamos el modelo
 
-class OrderSeeder extends Seeder
+
+class ClientSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +16,6 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        Order::factory()->count(50)->create();
+        Client::factory()->count(30)->create();
     }
 }

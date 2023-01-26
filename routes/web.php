@@ -8,6 +8,7 @@ use App\Http\Controllers\AppEjemplo;
 use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\VideoclubController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ClientController;
 
 //Prueba para cargar login de ui laravel en bootstrap
 Route::get('/', function () { 
@@ -111,6 +112,11 @@ Route::get("/catalog/edit/{id}", [VideoclubController::class, "edit"]);
 Route::resource("products", ProductController::class); //Equivale a los 7 metodos
 
 
+//CONTROLADOR ClientController
+Route::resource("clients", ClientController::class);
+
+
+
 //Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -118,3 +124,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

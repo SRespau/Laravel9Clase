@@ -10,12 +10,14 @@
             <br>
             
             <a class="btn btn-primary" href="{{route('products.index')}}">Lista Productos</a>
-
+            <br><br>
             <table class="table table-striped">
                 <tr>
                     <th><b>Nombre</b></th>
                     <th>Precio</th>
                     <th>Descripcion</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 
                 <tr>
@@ -28,7 +30,12 @@
                     </td>                    
 
                     <td>
-                        Borrar
+                        <form action="{{route('products.destroy', $product->id)}}" method="post">
+                            @csrf
+                            @method("DELETE")
+
+                            <button type="submit" class="btn btn-warning">Borrar</button>
+                        </form>
                     </td>
 
                 </tr>

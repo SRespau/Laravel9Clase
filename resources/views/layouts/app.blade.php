@@ -30,8 +30,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('clients.index') }}">Clientes</a>
                         </li>
                     </ul>
 

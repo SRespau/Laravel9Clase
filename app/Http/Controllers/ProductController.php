@@ -60,7 +60,7 @@ class ProductController extends Controller
         */
         //2º forma, con eloquent
         Product::create($request->all());
-        return redirect()->route("products.index")->with("exito", "Producto actualizado correctamente"); //El mensaje no saldrá de base, hay que recogerlo
+        return redirect()->route("products.index")->with("exito", "Producto añadido correctamente"); //El mensaje no saldrá de base, hay que recogerlo
 
     }
 
@@ -115,7 +115,7 @@ class ProductController extends Controller
 
         ]);
         $product = Product::Find($id);
-        $product->nombre = $request->input("nombre"); //atributo "name" del input del formulario
+        $product->nombre = $request->input("nombre"); //atributo "nombre" del input del formulario
         $product->descripcion = $request->input("descripcion");
         $product->precio = $request->input("precio");
         $product->save(); //Metodo de eloquent
