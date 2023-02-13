@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class, 
             OrderSeeder::class,
             ClientOrderSeeder::class,
-            UserSeeder::class,          
+            UserSeeder::class,
+            StudySeeder::class,          
         ]);
     }
 }

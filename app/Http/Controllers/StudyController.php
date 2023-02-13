@@ -3,43 +3,59 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Study;
 
 class StudyController extends Controller{
     
     public function index()
     {
-        //return $_SERVER; //Devuelve la info de $_SERVER en formato json al ponerlo en el controlador
-        //dd($_SERVER); // dd();Vuelca en contenido de una variable y para la ejecución. Es una muy buena alternativa a var_dump(). Si una variable sale null podemos ver que ocurre
-        echo "Estamos en index de estudios";
+        $studyList = Study::all();
+        return view("study.index", ["studyList"=>$studyList]); 
     }
 
     public function show($id)
     {
-        echo "En show de estudio: $id";
+        $studyList = Study::all(); //Eloquent ORM
+        return view("study.index", ["studyList"=>$studyList]);
     }
 
     public function create()
-    {
-        echo "Este es el create de Studies";
+    {        
+        return view("study.create");
     }
 
     public function edit($id)
-    {
-        echo "Este es el edit de estudies para modificar la id $id";
+    {        
+        
+        $study = Study::find($id);
+       
+        return view("study.edit", ["study" => $study]);
     }
 
     public function destroy($id)
     {
-        echo "Este es el destroy de $id";
+        $study = Study::Find($id);
+        $study->delete();
+        return redirect()->route("studies.index")->with("exito", "Estudio eliminado correctamente"); 
+
     }
 
-    public function update($id)
+
+    public function update(Request $request, $id)
     {
-        echo "Este es el update de estudies para modificar la id $id";
+        $study = Study::Find($id);
+        
+        $study->fill($request->all());
+        $study->save();
+        
+        return redirect()->route("studies.index")->with("exito", "Estudio actualizado correctamente");
     }
 
-    public function store()
-    {
-        echo "Este es el store de estudies";
+
+    public function store(Request $request)
+    {        
+               
+        Study::create($request->all());
+        return redirect()->route("study.index")->with("exito", "Estudio añadido correctamente");
     }
 }

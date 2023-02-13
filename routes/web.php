@@ -115,10 +115,12 @@ Route::resource("products", ProductController::class); //Equivale a los 7 metodo
 //CONTROLADOR ClientController
 Route::resource("clients", ClientController::class);
 
+//CONTROLADOR StudyController
+Route::resource("studies", StudyController::class);
+
 
 
 //Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
