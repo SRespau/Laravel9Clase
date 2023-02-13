@@ -8,6 +8,13 @@ use App\Models\Order;
 
 class ClientController extends Controller
 {
+    //Filtro añadido al controlador. Tendrá que estar el usuario registrado para que pueda acceder
+    public function __construct()
+    {
+        $this->middleware("auth");
+        //$this->middleware("auth")->only("index"); Filtrar solo Index
+        //$this->middleware("auth")->except("index"); Filtrar todo menos index
+    }
     /**
      * Display a listing of the resource.
      *
@@ -70,7 +77,7 @@ class ClientController extends Controller
         $client = Client::find($id);
         //Necesitamos mostrar los pedidos de cliente: buscamos en la tabla orders donde la id enviada es igual a la client_id y metemos en un array todos los datos
         $orders = Order::where('client_id', $id)->get();
-        //Mandamos a la vista show de cliente ambas variables para que podamos acceder a sus datos
+        //Mandamos a la vista show de cliente ambas variables para que podamos acceder a sus datos. Esto es una variable flash, que se añade a la sesion y cuando se usa es borrada
         return view("client.show")->with("client", $client)->with("orders", $orders);
     }
 
