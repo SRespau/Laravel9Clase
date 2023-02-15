@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\StudyController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,20 @@ Route::fallback(function () {
 });
 
 
+
+// rutas con este prefijo: /api/auth/....
+//Las rutas las voy a restringir con un middleware
+//Los metodos se ponen a mano porque el resource coge el CRUD.
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth' //Todas las rutas que estan dentro tienen que tener el prefijo auth -> http://laravel9.local/api/auth/login
+    ], function ($router) {
+        Route::post('register', [AuthController::class, 'register']);
+        Route::post('login', [AuthController::class, 'login']);
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('refresh',  [AuthController::class, 'refresh']);
+        Route::post('me',  [AuthController::class, 'me']);
+});    
 
 
 

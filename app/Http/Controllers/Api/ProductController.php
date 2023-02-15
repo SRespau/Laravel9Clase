@@ -20,6 +20,12 @@ class ProductController extends Controller
     }
 }
     */
+
+    //Le metemos un middleware para que tenga que estar autenticado para continuar
+    public function __construct()
+    {
+        $this->middleware("auth:api");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,10 +35,20 @@ class ProductController extends Controller
     // A su vez también es necesario devolver el código HTTP de la respuesta.
     public function index()
     {
-        // return Product::all();
-        $products = Product::all();
+        //Autorización de acceso. Asi sería en web:
+        //$this->authorize("viewAny", Product::class);
 
-        return response()->json(['status' => 'ok', 'data' => $products], 200);
+        //En API. Comprobará ProductPolicy
+        $user = \Auth::user();
+        if ($user->can("viewAny", Product::class)) {
+
+            // return Product::all(); Version incompleta. Version completa es devolver producto en json con un status
+            $products = Product::all();
+
+            return response()->json(['status' => 'ok', 'data' => $products], 200);
+        }else{
+            return response()->json(['status' => 'NOK', "message" => "No tiene permiso de acceso"], 403);
+        }
     }
 
     /**
