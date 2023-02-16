@@ -27,7 +27,7 @@ class ClientFactory extends Factory
             "name" => $this->faker->firstName(),
             "surname" => $this->faker->lastName() . " " . $this->faker->lastName(),
             "phoneNumber"=> $this->faker->unique()->phoneNumber(),
-            "email" => $this->faker->unique()->safeEmail()
+            "email" => $this->faker->unique()->safeEmail(),
         ];
     }
 }

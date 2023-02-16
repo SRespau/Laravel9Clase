@@ -6,10 +6,10 @@
         <div class="col-md-12">
 
 
-            <h1>Editar Producto</h1>
+            <h1>Editar Socio</h1>
             <br>
 
-            <a class="btn btn-primary" href="{{route('members.index')}}">Lista Productos</a>
+            <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
 
             @if($errors->any())
             
@@ -31,7 +31,7 @@
                 <br><br>
                 Apellidos: <input type="text" name="apellidos" id="apellidos" value="{{ $member->apellidos ?? '' }}">
                 <br><br>
-                Dirección: <input type="text" name="direccion" id="direccion" value="{{ $member->dirección ?? '' }}">
+                Dirección: <input type="text" name="direccion" id="direccion" value="{{ $member->direccion ?? '' }}">
                 <br><br>
                 Teléfono: <input type="text" name="telefono" id="telefono" value="{{ $member->telefono ?? '' }}">
                 <br><br>

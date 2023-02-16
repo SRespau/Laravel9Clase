@@ -9,7 +9,7 @@
             <h1>Detalle Socio</h1>
             <br>
             
-            <a class="btn btn-primary" href="{{route('products.index')}}">Lista Productos</a>
+            <a class="btn btn-primary" href="{{route('products.index')}}">Lista Socios</a>
             <br><br>
             <table class="table table-striped">
                 

@@ -15,15 +15,15 @@ return new class extends Migration
     //Crea las tablas
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) { //Función anonima a la que se le pasa un objeto Blueprint. Usamos Schema::create
-            $table->id();//La creará integer, unsigned(sin signo), autoincremental y primary key
+        Schema::create('users', function (Blueprint $table) { 
+            $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken(); //Crea un token aleatorio de tipo cadena
-            $table->timestamps(); //este comando crea en la tabla dos campos automaticamente -> created_at, updated_at
-            //Se puede poner timestamp y crearia un campo timestamp. Para que cree ambos campos ha de ir en mayuscula
+            $table->string('rol');
+            $table->rememberToken(); 
+            $table->timestamps(); 
         });
     }
 

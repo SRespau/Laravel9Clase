@@ -31,11 +31,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.index') }}">Clientes</a>
-                        </li>
+                            <a class="nav-link" href="{{ route('members.index') }}">Socios</a>
+                        </li>                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->

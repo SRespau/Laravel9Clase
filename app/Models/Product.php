@@ -28,4 +28,11 @@ class Product extends Model
     {        
         return strtoupper($value); 
     }
+
+
+    //Ejercicio coger el precio y lo muestre con la palabra euros
+    public function getPrecioAttribute($value)
+    {        
+        return ($value . "€"); 
+    }
 }

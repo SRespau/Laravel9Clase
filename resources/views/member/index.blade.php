@@ -22,8 +22,10 @@
             <table class="table table-striped">
                 <tr style="text-align: center;">
                     <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Descripcion</th>
+                    <th>Apellidos</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -37,15 +39,14 @@
                     <td>{{ $member->email }}</td>
 
                     <td>
-                    {{--Can comprueba si el usuario tiene politicas para relizar esos metodos--}}
-                    {{--Politica para decirle que si el usuario puede actualizarlo le aparecerá el botón--}}
+                    
                     @can("update", $member)  
                         <a class="btn btn-primary" href="{{route('members.edit', $member->id)}}">Editar</a>
                     @endcan
                     </td>
 
                     <td>
-                    {{--Politica para decirle que si el usuario puede verlo le aparecerá el botón--}}
+                    
                     @can("view", $member)    
                         <a class="btn btn-primary" href="{{route('members.show', $member->id)}}">Ver</a>
                     @endcan
@@ -56,7 +57,6 @@
                             @csrf
                             @method("DELETE")
 
-                            {{--Si no ponemos limitación de productos que puede modificar solamente con "delete" valdría. Sino sería @can("delete", $product)--}}
                             @can("delete", $member) 
                             <button type="submit" class="btn btn-warning">Eliminar</button>
                             @endcan

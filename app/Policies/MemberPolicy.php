@@ -6,7 +6,7 @@ use App\Models\Member;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProductPolicy
+class MemberPolicy
 {
     use HandlesAuthorization;
 
@@ -26,11 +26,11 @@ class ProductPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Auth\Access\Response|bool
      */
     
-    public function view(User $user, Member $product)
+    public function view(User $user, Member $member)
     {
        return true;         
     }
@@ -68,12 +68,13 @@ class ProductPolicy
      */
     public function delete(User $user, Member $member)
     {
-        return $user->rol == "administrador" ? true : false;
+        return true;
+        //return $user->rol == "administrador" ? true : false;
     }
 
     //Regla personalizada. Ponemos que solamente el usuario "Eduardo" pueda cambiar el precio
     public function changePrice(User $user, Member $member){
-        return $user->name ="Eduardo";
+        //return $user->name ="Eduardo";
     }
 
     /**

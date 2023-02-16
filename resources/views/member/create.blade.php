@@ -9,7 +9,7 @@
             <h1>Alta de Socio</h1>
             <br>
 
-            <a class="btn btn-primary" href="{{route('socios.index')}}">Lista Socios</a>
+            <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
 
             @if($errors->any())
             
@@ -23,7 +23,7 @@
             </div>
             @endif
 
-            <form action="{{ route('socios.store') }}" method="post">   
+            <form action="{{ route('members.store') }}" method="post">   
                 @csrf 
                 
                 <br>
@@ -37,7 +37,7 @@
                 <br><br>
                 Email: <input type="text" name="email" id="email">
                 <br><br>                
-                <button type="submit" class="btn btn-primary">Crear producto</button>
+                <button type="submit" class="btn btn-primary">Crear Socio Nuevo</button>
             </form>
             <br>
 

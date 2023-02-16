@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    //Que haga resgricción de todos metodos si no estoy registrado, menos login y register, ya que no hace falta estar registrado para acceder a ellos
+    //Que haga restricción de todos metodos si no estoy registrado, menos login y register, ya que no hace falta estar registrado para acceder a ellos
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         //Genera un token que manda al cliente para que se identifique
         try {
-            if ($token = auth()->attempt($credentials)) {
+            if ($token = auth("api")->attempt($credentials)) {
                 return $this->respondWithToken($token); //OK
             } else {
                 return response()->json(['error' => 'Credenciales inválidas'], 400);
@@ -46,13 +46,13 @@ class AuthController extends Controller
 
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth("api")->user());
     }
 
 
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth("api")->refresh());
     }
 
 
