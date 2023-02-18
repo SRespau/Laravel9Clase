@@ -6,7 +6,7 @@
         <div class="col-md-12">
 
 
-            <h1>Alta de Socio</h1>
+            <h1>Editar Cita</h1>
             <br>
 
             <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
@@ -16,39 +16,41 @@
             <div class="alert alert-danger" style="width: 30%;">
                 <h5>Por favor, corrige los siguientes errores:</h5>
                 <ul>
-                    @foreach($errors->all() as $error) 
+                    @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                     @endforeach
                 </ul>
             </div>
             @endif
 
-            <form action="{{ route('members.store') }}" method="post">   
+            <h3>Cita actual</h3>
+            Tratamiento: <span>{{ $membersTreatment->treatment_id ?? '' }}</span>
+            <br><br>
+            Fecha: <span>{{ $membersTreatment->fecha ?? '' }}</span>
+            
+            <br><br>  <br><br>     
+
+
+            <h3>Modificar Cita</h3>
+
+            <form action="{{ route('membersTreatments.update', $membersTreatment->id) }}" method="POST"> 
                 @csrf 
-                
+                @method("PUT")
                 <br>
-                Nombre: <input type="text" name="nombre" id="nombre">
-                <br><br>
-                Apellidos: <input type="text" name="apellidos" id="apellidos">
-                <br><br>
-                Dirección: <input type="text" name="direccion" id="direccion">
-                <br><br>
-                Teléfono: <input type="text" name="telefono" id="telefono">
-                <br><br>
-                Email: <input type="text" name="email" id="email">
-                <br><br>
-                
+
                 Tratamiento:
                 <select name="treatment_id">
                 @foreach($treatments as $treatment)                
                 <option value="{{ $treatment-> id}}"  name="treatment_id" id="treatment_id">{{ $treatment->nombre }}</option>                
                 @endforeach
-                </select>                                
-                <br><br>  
-                Fecha: <input type="text" name="fecha" id="fecha">
-                <br><br>                
+                </select>
+                <br><br>
 
-                <button type="submit" class="btn btn-primary">Crear Socio Nuevo</button>
+
+                Fecha: <input type="text" name="fecha" id="fecha" value="{{ $membersTreatment->fecha ?? '' }}">
+                <br><br>                
+                
+                <button type="submit" class="btn btn-primary">Actualizar</button>
             </form>
             <br>
 

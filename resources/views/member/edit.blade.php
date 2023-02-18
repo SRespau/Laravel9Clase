@@ -37,10 +37,7 @@
                 <br><br>
                 Email: <input type="text" name="email" id="email" value="{{ $member->email ?? '' }}">
                 <br><br>
-                Tratamiento: <input type="text" name="tratamiento" id="tratamiento" value="{{ $center->tratamiento ?? '' }}">
-                <br><br>
-                Fecha: <input type="text" name="fecha" id="fecha" value="{{ $center->tratamiento ?? '' }}">
-                <br><br>
+                
                 <button type="submit" class="btn btn-primary">Actualizar</button>
             </form>
             <br>

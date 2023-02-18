@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Member;
+use App\Models\MembersTreatment;
+use App\Models\Treatment;
 
 class MemberController extends Controller
 {
@@ -33,7 +35,9 @@ class MemberController extends Controller
     public function create()
     {
         //$this->authorize("create", Member::class);
-        return view("member.create"); 
+        $treatments = Treatment::all();       
+        
+        return view("member.create", ["treatments"=>$treatments]);
     }
 
     /**
@@ -58,9 +62,23 @@ class MemberController extends Controller
             "direccion.required" => "Debes rellenar el campo " . "'" . "direccion" . "'",
             "telefono.required" => "Debes rellenar el campo " . "'" . "telefono" . "'",
         ]);
+               
+        $member = new Member();
+        $member->nombre = $request->input("nombre");
+        $member->apellidos = $request->input("apellidos");
+        $member->direccion = $request->input("direccion");
+        $member->telefono = $request->input("telefono");
+        $member->email= $request->input("email");
+        $member->save();
+        
+        $lastMember = Member::latest("id")->first();
+        
+        $membersTreatment = new MembersTreatment();
+        $membersTreatment->fecha = $request->input("fecha");
+        $membersTreatment->member_id = $lastMember["id"];
+        $membersTreatment->treatment_id = $request->input("tratamiento"); 
+        $membersTreatment->save();
 
-        //$this->authorize("create", Member::class);
-        Member::create($request->all());
         return redirect()->route("members.index")->with("exito", "Socio añadido correctamente");
 
     }
@@ -75,7 +93,16 @@ class MemberController extends Controller
     {
         $member = Member::find($id);
         //$this->authorize("view", $member);
-        return view("member.show", ["member" => $member]);
+        $dates = MembersTreatment::where("member_id", $id)->get();
+        
+        $treatments = [];
+        for($i = 0; $i < sizeof($dates); $i++){
+            array_push($treatments,Treatment::where("id", $dates[$i]["treatment_id"]));
+        }
+        
+        //$treatments = Treatment::where("id", ->get();
+
+        return view("member.show")->with("member", $member)->with("dates", $dates)->with("treatments", $treatments);
     }
 
     /**

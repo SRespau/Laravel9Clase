@@ -10,6 +10,7 @@ use App\Http\Controllers\VideoclubController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MembersTreatmentController;
 
 //Prueba para cargar login de ui laravel en bootstrap
 Route::get('/', function () { 
@@ -50,6 +51,8 @@ Route::resource("clients", ClientController::class);
 
 //CONTROLADOR StudyController
 Route::resource("members", MemberController::class);
+
+Route::resource("membersTreatments", MembersTreatmentController::class);
 
 
 

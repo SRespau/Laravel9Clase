@@ -8,11 +8,11 @@
 
             <h1>Detalle Socio</h1>
             <br>
-            
-            <a class="btn btn-primary" href="{{route('products.index')}}">Lista Socios</a>
+
+            <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
             <br><br>
             <table class="table table-striped">
-                
+
                 <tr>
                     <th>Nombre</th>
                     <th>Apellidos</th>
@@ -21,9 +21,9 @@
                     <th>Email</th>
                     <th></th>
                     <th></th>
-                    
+
                 </tr>
-                
+
                 <tr>
                     <td>{{ $member->nombre }}</td>
                     <td>{{ $member->apellidos }}</td>
@@ -32,10 +32,10 @@
                     <td>{{ $member->email }}</td>
 
                     <td>
-                    @can("update", $member)
+                        @can("update", $member)
                         <a class="btn btn-primary" href="{{route('members.edit', $member->id)}}">Editar</a>
-                    @endcan
-                    </td>                    
+                        @endcan
+                    </td>
 
                     <td>
                         <form action="{{route('members.destroy', $member->id)}}" method="post">
@@ -48,11 +48,31 @@
                     </td>
 
                 </tr>
-                
+            </table>
+            <h1>Cita</h1>
+
+            <table class="table table-striped">
+
+                <tr>
+                    <th>Tratamiento</th>
+                    <th>Fecha</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach($dates as $date)
+                <tr>
+                    <td>{{ $treatments -> nombre}}</td>
+                    <td>{{ $date->fecha }}</td>
+                    <td></td>
+                    <td></td>
+                    <td><a class="btn btn-primary" href="{{route('membersTreatments.edit', $date->id)}}">Editar</a></td>
+                </tr>                       
+                @endforeach
             </table>
         <div>
     <div>
 <div>
 
 @stop
-
