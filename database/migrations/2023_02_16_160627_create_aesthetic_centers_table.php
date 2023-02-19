@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('aesthetic_centers', function (Blueprint $table) {
-            $table->id();
-            $table->string('NIF',9);
+            $table->string("id")->primary();
+            $table->string('nif',9);
             $table->string('nombre',50);
             $table->string('razon_social');
             $table->string('direccion',200);

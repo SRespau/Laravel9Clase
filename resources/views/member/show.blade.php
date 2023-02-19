@@ -21,6 +21,7 @@
                     <th>Email</th>
                     <th></th>
                     <th></th>
+                    <th></th>
 
                 </tr>
 
@@ -47,6 +48,10 @@
                         </form>
                     </td>
 
+                    <td>                        
+                        <a class="btn btn-primary" style="width:100px" href="{{route('citaNueva', $member->id)}}">Añadir Cita</a>
+                    </td>
+
                 </tr>
             </table>
             <h1>Cita</h1>
@@ -61,15 +66,15 @@
                     <th></th>
                 </tr>
 
-                @foreach($dates as $date)
+                @for ($i = 0; $i < sizeof($dates); $i++)
                 <tr>
-                    <td>{{ $treatments -> nombre}}</td>
-                    <td>{{ $date->fecha }}</td>
+                    <td>{{ $treatments[$i][0] -> nombre}}</td>
+                    <td>{{ $dates[$i]->fecha }}</td>
                     <td></td>
                     <td></td>
-                    <td><a class="btn btn-primary" href="{{route('membersTreatments.edit', $date->id)}}">Editar</a></td>
+                    <td><a class="btn btn-primary" href="{{route('membersTreatments.edit', $dates[$i]->id)}}">Editar</a></td>
                 </tr>                       
-                @endforeach
+                @endfor
             </table>
         <div>
     <div>

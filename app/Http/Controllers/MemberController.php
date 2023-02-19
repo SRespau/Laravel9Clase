@@ -76,7 +76,7 @@ class MemberController extends Controller
         $membersTreatment = new MembersTreatment();
         $membersTreatment->fecha = $request->input("fecha");
         $membersTreatment->member_id = $lastMember["id"];
-        $membersTreatment->treatment_id = $request->input("tratamiento"); 
+        $membersTreatment->treatment_id = $request->input("treatment_id"); 
         $membersTreatment->save();
 
         return redirect()->route("members.index")->with("exito", "Socio añadido correctamente");
@@ -95,10 +95,12 @@ class MemberController extends Controller
         //$this->authorize("view", $member);
         $dates = MembersTreatment::where("member_id", $id)->get();
         
+        
         $treatments = [];
         for($i = 0; $i < sizeof($dates); $i++){
-            array_push($treatments,Treatment::where("id", $dates[$i]["treatment_id"]));
+            array_push($treatments,Treatment::where("id", $dates[$i]["treatment_id"])->get());
         }
+       
         
         //$treatments = Treatment::where("id", ->get();
 

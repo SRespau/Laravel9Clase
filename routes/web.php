@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\StudyController; //Añadimos el studycontroller para enrutar los metodos de la clase
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\AppEjemplo;
 use App\Http\Controllers\AsignaturaController;
@@ -43,7 +42,7 @@ Route::get("/catalog/edit/{id}", [VideoclubController::class, "edit"]);
 
 */
 //CONTROLADOR ProductController
-Route::resource("products", ProductController::class); //Equivale a los 7 metodos
+Route::resource("products", ProductController::class);
 
 
 //CONTROLADOR ClientController
@@ -52,7 +51,9 @@ Route::resource("clients", ClientController::class);
 //CONTROLADOR StudyController
 Route::resource("members", MemberController::class);
 
+Route::get("/membersTreatments/citaNueva/{id}", [MembersTreatmentController::class, "citaNueva"])->name("citaNueva");
 Route::resource("membersTreatments", MembersTreatmentController::class);
+
 
 
 

@@ -10,7 +10,7 @@
             <br>
 
             <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
-
+            <br><br>
             @if($errors->any())
             
             <div class="alert alert-danger" style="width: 30%;">
@@ -24,7 +24,7 @@
             @endif
 
             <h3>Cita actual</h3>
-            Tratamiento: <span>{{ $membersTreatment->treatment_id ?? '' }}</span>
+            Tratamiento: <span>{{ $nombreTratamiento[0] -> nombre ?? '' }}</span>
             <br><br>
             Fecha: <span>{{ $membersTreatment->fecha ?? '' }}</span>
             
@@ -37,6 +37,7 @@
                 @csrf 
                 @method("PUT")
                 <br>
+                <input type="hidden" name="member_id" id="member_id" value="{{ $membersTreatment->member_id}}">
 
                 Tratamiento:
                 <select name="treatment_id">
@@ -47,7 +48,9 @@
                 <br><br>
 
 
-                Fecha: <input type="text" name="fecha" id="fecha" value="{{ $membersTreatment->fecha ?? '' }}">
+                Dia: <input type="date" name="fecha" id="fecha" value="{{ $membersTreatment->fecha ?? '' }}">
+                <br><br>
+                Hora: <input type="string" name="hora" id="hora">
                 <br><br>                
                 
                 <button type="submit" class="btn btn-primary">Actualizar</button>

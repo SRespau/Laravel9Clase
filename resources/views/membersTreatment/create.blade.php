@@ -6,7 +6,7 @@
         <div class="col-md-12">
 
 
-            <h1>Alta de Socio</h1>
+            <h1>Alta de Cita</h1>
             <br>
 
             <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
@@ -23,21 +23,10 @@
             </div>
             @endif
 
-            <form action="{{ route('members.store') }}" method="post">   
-                @csrf 
+            <form action="{{ route('membersTreatments.store') }}" method="post">   
+                @csrf                
                 
-                <br>
-                Nombre: <input type="text" name="nombre" id="nombre">
-                <br><br>
-                Apellidos: <input type="text" name="apellidos" id="apellidos">
-                <br><br>
-                Dirección: <input type="text" name="direccion" id="direccion">
-                <br><br>
-                Teléfono: <input type="text" name="telefono" id="telefono">
-                <br><br>
-                Email: <input type="text" name="email" id="email">
-                <br><br>
-                
+                <input type="hidden" id="member_id" name="member_id" value="{{ $member -> id}}">
                 Tratamiento:
                 <select name="treatment_id">
                 @foreach($treatments as $treatment)                
@@ -48,7 +37,7 @@
                 Fecha: <input type="date" name="fecha" id="fecha">
                 <br><br>                
 
-                <button type="submit" class="btn btn-primary">Crear Socio Nuevo</button>
+                <button type="submit" class="btn btn-primary">Crear Cita Nueva</button>
             </form>
             <br>
 

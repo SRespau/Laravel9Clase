@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('aesthetic_hairdresser_treatment', function (Blueprint $table) {
             $table->id();
             
-            $table->unsignedBigInteger(('aesthetic_id'));
+            $table->string(('aesthetic_id'));
             $table->foreign('aesthetic_id')->references('id')->on('aesthetic_centers');
 
-            $table->unsignedBigInteger(('hairdresser_id'));
+            $table->string(('hairdresser_id'));
             $table->foreign('hairdresser_id')->references('id')->on('hairdressers');
 
             $table->unsignedBigInteger(('treatment_id'));

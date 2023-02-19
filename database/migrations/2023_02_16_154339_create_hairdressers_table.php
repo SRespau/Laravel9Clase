@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hairdressers', function (Blueprint $table) {
-            $table->id();
+            $table->string("id")->primary();
             $table->string('NIF',9);
             $table->string('nombre',50);
             $table->string('razon_social');
