@@ -18,30 +18,30 @@ class TreatmentSeeder extends Seeder
     {
         DB::table('treatments')->insert([
             'id' => '1',
-            'nombre' => 'Masaje Tailandes',
+            'nombre' => 'Masaje Tailandés',
             'tipo' => 'masaje',
-            'precio' => '49.99',
+            'precio' => '50',
         ]);
 
         DB::table('treatments')->insert([
             'id' => '2',
             'nombre' => 'Depliacion laser completa',
             'tipo' => 'depilacion',
-            'precio' => '89.99',
+            'precio' => '90',
         ]);
        
         DB::table('treatments')->insert([
             'id' => '3',
-            'nombre' => 'Corte degrado con lavado',
+            'nombre' => 'Corte degradado con lavado',
             'tipo' => 'capilares',
-            'precio' => '9.99',
+            'precio' => '10',
         ]);
 
         DB::table('treatments')->insert([
             'id' => '4',
             'nombre' => 'Teñimiento de pelo a cualquier color',
             'tipo' => 'capilares',
-            'precio' => '39.99',
+            'precio' => '40',
         ]);
     }
 }

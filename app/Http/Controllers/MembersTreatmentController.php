@@ -46,7 +46,19 @@ class MembersTreatmentController extends Controller
      */
     public function store(Request $request)
     {
+        $memberId = $request->input("member_id");
         
+        $historialCitas = MembersTreatment::find($memberId)->get();
+        
+        $member = Member::find($memberId);
+        $treatments = Treatment::all();
+        for($i = 0; $i < sizeof($historialCitas); $i++){
+            if($historialCitas[$i]["fecha"] === $request->input("fecha") || $historialCitas[$i]["fecha"] > $request->input("fecha")){
+                return view("membersTreatment.create")->with("treatments", $treatments)->with("member", $member)->with("errors", "Fecha añadida no válida. Fecha ya añadida al socio o fecha ya pasada.");
+            }
+
+        }
+
         MembersTreatment::create($request->all());
         
         return redirect()->route("members.index")->with("exito", "Cita añadida correctamente");

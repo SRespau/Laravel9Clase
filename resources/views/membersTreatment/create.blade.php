@@ -11,15 +11,9 @@
 
             <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
 
-            @if($errors->any())
-            
+            @if($errors)            
             <div class="alert alert-danger" style="width: 30%;">
-                <h5>Por favor, corrige los siguientes errores:</h5>
-                <ul>
-                    @foreach($errors->all() as $error) 
-                    <li>{{$error}}</li>
-                    @endforeach
-                </ul>
+                <h5>{{$errors}}</h5>                
             </div>
             @endif
 

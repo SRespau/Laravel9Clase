@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('members_treatments', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha');
+            $table->date('fecha');
 
             $table->unsignedBigInteger(('member_id'));
             $table->foreign('member_id')->references('id')->on('members');

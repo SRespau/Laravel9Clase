@@ -77,7 +77,7 @@
                 @endfor
                 <tr>
                     <td><b>TOTAL</b></td>
-                    <td></td>
+                    <td>{{ $total }}{{"€"}}</td>
                 </tr>
             </table>
         <div>
