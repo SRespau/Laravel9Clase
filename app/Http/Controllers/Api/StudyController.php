@@ -59,7 +59,7 @@ class StudyController extends Controller
         // Chequeamos si encontró o no el study
         if (!$study) {
             // Se devuelve un array errors con los errores detectados y código 404
-            return response()->json(['errors' => (['code' => 404, 'message' => 'No se encuentra un studio con ese código.'])], 404);
+            return response()->json(['errors' => (['code' => 404, 'message' => 'No se encuentra un estudio con ese código.'])], 404);
         }
 
         // Devolvemos la información encontrada.

@@ -21,8 +21,9 @@ class StudyFactory extends Factory
     {
         return [
             "name" => $this->faker->word(),//word()Genera una palabra aleatoria. Tenemos que poner faker para que lo invoque
-            "code" => $this->faker->paragraph(), //paragraph() Genera un parrafo aleatorio
-            "precio" => $this->faker->randomFloat(2,3,40) //randomFloat(). Numero aleatorio float de 2 decimales entre 3 y 40
+            "code" => $this->faker->word(), //paragraph() Genera un parrafo aleatorio
+            "family" => $this->faker->regexify('[A-Z]{3}[0-9]{3}'), //Genera un string aleatorio con 3 letras y 3 numeros
+            "level" => $this->faker->randomElement(['GM', 'GS']),
         ];
     }
 }

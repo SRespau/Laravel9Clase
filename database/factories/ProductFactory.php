@@ -22,8 +22,8 @@ class ProductFactory extends Factory
         return [//Aqui asocio los datos
             "nombre" => $this->faker->word(),//word()Genera una palabra aleatoria. Tenemos que poner faker para que lo invoque
             "descripcion" => $this->faker->paragraph(), //paragraph() Genera un parrafo aleatorio
-            "family" => $this->faker->word, //randomFloat(). Numero aleatorio float de 2 decimales entre 3 y 40
-            "level" => $this->faker->word,
+            "precio" => $this->faker->randomFloat(2,2,10), //randomFloat(). Numero aleatorio float de 2 decimales entre 3 y 40
+            
         ];
     }
 }
