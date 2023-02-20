@@ -75,6 +75,10 @@
                     <td><a class="btn btn-primary" href="{{route('membersTreatments.edit', $dates[$i]->id)}}">Editar</a></td>
                 </tr>                       
                 @endfor
+                <tr>
+                    <td><b>TOTAL</b></td>
+                    <td></td>
+                </tr>
             </table>
         <div>
     <div>
