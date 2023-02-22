@@ -21,15 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('rol');
             $table->rememberToken(); 
-            $table->timestamps(); 
-            /*
-            $table->id();//La creará integer, unsigned(sin signo), autoincremental y primary key
-            $table->string('name');
-            $table->string('email')->unique();            
-            $table->string('password');
-            $table->string("rol");
-            $table->rememberToken();
-            */                       
+            $table->timestamps();                                  
         });
     }
 

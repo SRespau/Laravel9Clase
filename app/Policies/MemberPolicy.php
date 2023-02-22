@@ -19,7 +19,7 @@ class MemberPolicy
     
     public function viewAny(User $user)
     {
-        return true; 
+        return $user->rol == "gerente" || $user->rol == "recepcionista" ? true : false; 
     }
 
     /**
@@ -68,13 +68,12 @@ class MemberPolicy
      */
     public function delete(User $user, Member $member)
     {
-        return true;
-        //return $user->rol == "administrador" ? true : false;
+        return $user->rol == "gerente" ? true : false;
     }
 
-    //Regla personalizada. Ponemos que solamente el usuario "Eduardo" pueda cambiar el precio
-    public function changePrice(User $user, Member $member){
-        //return $user->name ="Eduardo";
+
+    public function historico(User $user){
+        return $user->rol == "gerente" ? true : false;
     }
 
     /**

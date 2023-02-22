@@ -9,10 +9,10 @@
             <h1>Editar Socio</h1>
             <br>
 
-            <a class="btn btn-primary" href="{{route('members.index')}}">Lista Socios</a>
+
 
             @if($errors->any())
-            
+
             <div class="alert alert-danger" style="width: 30%;">
                 <h5>Por favor, corrige los siguientes errores:</h5>
                 <ul>
@@ -23,8 +23,8 @@
             </div>
             @endif
 
-            <form action="{{ route('members.update', $member->id) }}" method="POST"> 
-                @csrf 
+            <form action="{{ route('members.update', $member->id) }}" method="POST">
+                @csrf
                 @method("PUT")
                 <br>
                 Nombre: <input type="text" name="nombre" id="nombre" value="{{ $member->nombre ?? '' }}">
@@ -37,13 +37,14 @@
                 <br><br>
                 Email: <input type="text" name="email" id="email" value="{{ $member->email ?? '' }}">
                 <br><br>
-                
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+
+                <button type="submit" class="btn btn-success">Actualizar</button>
+                <a class="btn btn-primary" style="width:100px;" href="{{ route('members.show', $member->id)}}">Volver</a>
             </form>
             <br>
 
-            <div>
-        <div>
-    <div>
+        </div>
+    </div>
+</div>
 
 @stop

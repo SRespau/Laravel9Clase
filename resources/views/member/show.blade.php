@@ -43,17 +43,18 @@
                             @csrf
                             @method("DELETE")
                             @can("delete", $member)
-                            <button type="submit" class="btn btn-warning">Eliminar</button>
+                            <button type="submit" onclick="return confirm('Confirmar eliminación')" class="btn btn-warning">Eliminar</button>
                             @endcan
                         </form>
                     </td>
 
-                    <td>                        
+                    <td>
                         <a class="btn btn-primary" style="width:100px" href="{{route('citaNueva', $member->id)}}">Añadir Cita</a>
                     </td>
 
                 </tr>
             </table>
+            @can("historico", $member)
             <h1>Cita</h1>
 
             <table class="table table-striped">
@@ -66,22 +67,22 @@
                     <th></th>
                 </tr>
 
-                @for ($i = 0; $i < sizeof($dates); $i++)
-                <tr>
+                @for ($i = 0; $i < sizeof($dates); $i++) <tr>
                     <td>{{ $treatments[$i][0] -> nombre}}</td>
                     <td>{{ $dates[$i]->fecha }}</td>
                     <td></td>
                     <td></td>
                     <td><a class="btn btn-primary" href="{{route('membersTreatments.edit', $dates[$i]->id)}}">Editar</a></td>
-                </tr>                       
-                @endfor
-                <tr>
-                    <td><b>TOTAL</b></td>
-                    <td>{{ $total }}{{"€"}}</td>
-                </tr>
+                    </tr>
+                    @endfor
+                    <tr>
+                        <td><b>TOTAL</b></td>
+                        <td>{{ $total }}{{"€"}}</td>
+                    </tr>
             </table>
-        <div>
-    <div>
-<div>
+            @endcan
+        </div>
+    </div>
+</div>
 
 @stop

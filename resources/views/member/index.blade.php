@@ -4,17 +4,17 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <!--Con este if obtenemos el with del ProductController, donde ponemos los mensajes de exito una vez redirigimos al terminar un metodo-->
-            @if($message = Session::get("exito")) 
+
+            @if($message = Session::get("exito"))
             <div class="alert alert-success">
                 <p>{{$message}}</p>
             </div>
             @endif
-            
+
             <h1 style="text-align: center;">Lista de Socios</h1>
             <br>
-            
-            @can("create", App\Models\Member::class) 
+
+            @can("create", App\Models\Member::class)
             <a class="btn btn-primary" href="{{route('members.create')}}">Nuevo Socio</a>
             @endcan
             <br><br>
@@ -39,17 +39,17 @@
                     <td>{{ $member->email }}</td>
 
                     <td>
-                    
-                    @can("update", $member)  
+
+                        @can("update", $member)
                         <a class="btn btn-primary" href="{{route('members.edit', $member->id)}}">Editar</a>
-                    @endcan
+                        @endcan
                     </td>
 
                     <td>
-                    
-                    @can("view", $member)    
+
+                        @can("view", $member)
                         <a class="btn btn-primary" href="{{route('members.show', $member->id)}}">Ver</a>
-                    @endcan
+                        @endcan
                     </td>
 
                     <td>
@@ -57,17 +57,18 @@
                             @csrf
                             @method("DELETE")
 
-                            @can("delete", $member) 
-                            <button type="submit" class="btn btn-warning">Eliminar</button>
+                            @can("delete", $member)
+                            <button type="submit" onclick="return confirm('Confirmar eliminación')"class="btn btn-warning">Eliminar</button>
                             @endcan
                         </form>
                     </td>
                 </tr>
                 @endforeach
             </table>
-        <div>
-    <div>
-<div>
+            <div style="text-align:center;">{{ $memberList->links() }}</div>            
+            
+        </div>
+    </div>
+</div>
 
 @stop
-

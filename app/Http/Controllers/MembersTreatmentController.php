@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\MembersTreatment;
 use App\Models\Treatment;
 use App\Models\Member;
+use App\Models\AestheticCenter;
+use App\Models\Hairdresser;
+use Carbon\Carbon;
+
 
 class MembersTreatmentController extends Controller
 {
@@ -35,7 +39,10 @@ class MembersTreatmentController extends Controller
         $member = Member::find($id);
         $treatments = Treatment::all();       
         
-        return view("membersTreatment.create")->with("treatments", $treatments)->with("member", $member);
+        $centros = Hairdresser::all();
+        $esteticas = AestheticCenter::all();
+
+        return view("membersTreatment.create")->with("treatments", $treatments)->with("member", $member)->with("esteticas", $esteticas)->with("centros", $centros);
     }
 
     /**
@@ -48,18 +55,34 @@ class MembersTreatmentController extends Controller
     {
         $memberId = $request->input("member_id");
         
-        $historialCitas = MembersTreatment::find($memberId)->get();
+        $historialCitas = MembersTreatment::where("member_id", $memberId)->get();
         
         $member = Member::find($memberId);
         $treatments = Treatment::all();
-        for($i = 0; $i < sizeof($historialCitas); $i++){
-            if($historialCitas[$i]["fecha"] === $request->input("fecha") || $historialCitas[$i]["fecha"] > $request->input("fecha")){
-                return view("membersTreatment.create")->with("treatments", $treatments)->with("member", $member)->with("errors", "Fecha añadida no válida. Fecha ya añadida al socio o fecha ya pasada.");
-            }
+        $centros = Hairdresser::all();
+        $esteticas = AestheticCenter::all();
 
+        $fechaHoy = Carbon::now()->format('Y-m-d');
+
+        for($i = 0; $i < sizeof($historialCitas); $i++){
+            if($historialCitas[$i]["fecha"] === $request->input("fecha") || $request->input("fecha") < $fechaHoy){
+                return view("membersTreatment.create")->with("treatments", $treatments)->with("member", $member)->with("errores", "Fecha añadida no válida. Fecha ya añadida al socio o fecha ya pasada.")->with("esteticas", $esteticas)->with("centros", $centros);
+            }
         }
 
-        MembersTreatment::create($request->all());
+        $cita = new MembersTreatment();
+        $cita->member_id = $request->input("member_id");
+        $cita->fecha = $request->input("fecha");        
+        $cita->treatment_id = $request->input("treatment_id"); 
+        
+        if(substr($request->input("center_id"), 0, 1) == "B") {
+            $cita->aesthetic_id =  $request->input("center_id");
+            $cita->hairdresser_id = null;
+        }else{
+            $cita->aesthetic_id =  null;
+            $cita->hairdresser_id = $request->input("center_id");
+        }
+        $cita->save();
         
         return redirect()->route("members.index")->with("exito", "Cita añadida correctamente");
     }
@@ -84,13 +107,22 @@ class MembersTreatmentController extends Controller
     public function edit($id)
     {
         $membersTreatment = MembersTreatment::find($id);
+        $centros = Hairdresser::all();
+        $esteticas = AestheticCenter::all();
         
         $nombreTratamiento = Treatment::where("id", $membersTreatment["treatment_id"])->get();
         
         $treatments = Treatment::all();
+
+        if($membersTreatment["aesthetic_id"] == null){
+            $centroActual = Hairdresser::find($membersTreatment["hairdresser_id"]);
+        }else{
+            $centroActual = AestheticCenter::find($membersTreatment["aesthetic_id"]);
+        }
+        
         //$this->authorize("update", $member);
         
-        return view("membersTreatment.edit")->with("membersTreatment", $membersTreatment)->with("treatments", $treatments)->with("nombreTratamiento", $nombreTratamiento);
+        return view("membersTreatment.edit")->with("membersTreatment", $membersTreatment)->with("treatments", $treatments)->with("nombreTratamiento", $nombreTratamiento)->with("esteticas", $esteticas)->with("centros", $centros)->with("centroActual", $centroActual);
     }
 
     /**
@@ -102,19 +134,49 @@ class MembersTreatmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $membersTreatment = MembersTreatment::Find($id);
-        //$this->authorize("update", $member);       
+        $cita = MembersTreatment::Find($id);
+        $historialCitas = MembersTreatment::where("member_id", $request->input("member_id"))->get();
         
-        $membersTreatment->treatment_id = $request->input("treatment_id");
-        $fechaCompleta = $request->input("fecha") . " " . $request->input("hora");
-        $membersTreatment->fecha = $fechaCompleta;
+        //$this->authorize("update", $member);       
+        $centros = Hairdresser::all();
+        $esteticas = AestheticCenter::all();
+        $treatments = Treatment::all();
 
-        $membersTreatment->save();
+        $nombreTratamiento = Treatment::where("id", $cita["treatment_id"])->get();
+
+        $cita->member_id = $request->input("member_id");        
+
+        $fechaHoy = Carbon::now()->format('Y-m-d');
+        
+        if($cita["aesthetic_id"] == null){
+            $centroActual = Hairdresser::find($cita["hairdresser_id"]);
+        }else{
+            $centroActual = AestheticCenter::find($cita["aesthetic_id"]);
+        }
+        
+        for($i = 0; $i < sizeof($historialCitas); $i++){
+            if($historialCitas[$i]["fecha"] === $request->input("fecha") ||  $request->input("fecha") < $fechaHoy){
+                return view("membersTreatment.edit")->with("membersTreatment", $cita)->with("treatments", $treatments)->with("nombreTratamiento", $nombreTratamiento)->with("esteticas", $esteticas)->with("centros", $centros)->with("centroActual", $centroActual)->with("errores", "Fecha añadida no válida. Fecha ya añadida al socio o fecha ya pasada.");
+            }
+        }
+
+        $cita->fecha = $request->input("fecha");        
+        $cita->treatment_id = $request->input("treatment_id"); 
+        
+        if(substr($request->input("center_id"), 0, 1) == "B") {
+            $cita->aesthetic_id =  $request->input("center_id");
+            $cita->hairdresser_id = null;
+        }else{
+            $cita->aesthetic_id =  null;
+            $cita->hairdresser_id = $request->input("center_id");
+        }
+        $cita->save();
+
 
         // $membersTreatment->fill($request->all());
         // $membersTreatment->save();
 
-        return redirect()->route("members.index")->with("exito", "Socio actualizado correctamente"); 
+        return redirect()->route("members.index")->with("exito", "Cita actualizado correctamente"); 
     }
 
     /**

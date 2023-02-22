@@ -17,12 +17,18 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
 
-            $table->unsignedBigInteger(('member_id'));
-            $table->foreign('member_id')->references('id')->on('members');
+            $table->unsignedBigInteger('member_id');
+            $table->foreign('member_id')->references('id')->on('members')->onUpdate("cascade")->onDelete("cascade");;
 
-            $table->unsignedBigInteger(('treatment_id'));
-            $table->foreign('treatment_id')->references('id')->on('treatments');
+            $table->unsignedBigInteger('treatment_id');
+            $table->foreign('treatment_id')->references('id')->on('treatments')->onUpdate("cascade")->onDelete("cascade");;            
 
+            $table->string('aesthetic_id')->nullable();
+            $table->foreign('aesthetic_id')->references('id')->on('aesthetic_centers')->nullable()->onUpdate("cascade")->onDelete("cascade");
+
+            $table->string('hairdresser_id')->nullable();
+            $table->foreign('hairdresser_id')->references('id')->on('hairdressers')->nullable()->onUpdate("cascade")->onDelete("cascade");
+            
             $table->timestamps();
         });
     }

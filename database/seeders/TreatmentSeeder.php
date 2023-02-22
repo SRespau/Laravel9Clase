@@ -43,5 +43,47 @@ class TreatmentSeeder extends Seeder
             'tipo' => 'capilares',
             'precio' => '40',
         ]);
+
+        DB::table('treatments')->insert([
+            'id' => '5',
+            'nombre' => 'Mesoterapia',
+            'tipo' => 'capilares',
+            'precio' => '60',
+        ]);
+
+        DB::table('treatments')->insert([
+            'id' => '6',
+            'nombre' => 'Fotodepilacion',
+            'tipo' => 'capilares',
+            'precio' => '50',
+        ]);
+
+        DB::table('treatments')->insert([
+            'id' => '7',
+            'nombre' => 'Uñas permanentes',
+            'tipo' => 'estetica',
+            'precio' => '27',
+        ]);
+
+        DB::table('treatments')->insert([
+            'id' => '8',
+            'nombre' => 'Lavado y peinado',
+            'tipo' => 'capilares',
+            'precio' => '25',
+        ]);
+
+        DB::table('treatments')->insert([
+            'id' => '9',
+            'nombre' => 'Masaje descontracturante',
+            'tipo' => 'masaje',
+            'precio' => '70',
+        ]);
+
+        DB::table('treatments')->insert([
+            'id' => '10',
+            'nombre' => 'Presoterapia',
+            'tipo' => 'estetica',
+            'precio' => '80',
+        ]);
     }
 }

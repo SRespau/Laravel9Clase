@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             
             $table->string(('aesthetic_id'));
-            $table->foreign('aesthetic_id')->references('id')->on('aesthetic_centers');
+            $table->foreign('aesthetic_id')->references('id')->on('aesthetic_centers')->nullable()->onUpdate("cascade")->onDelete("cascade");
 
             $table->string(('hairdresser_id'));
-            $table->foreign('hairdresser_id')->references('id')->on('hairdressers');
+            $table->foreign('hairdresser_id')->references('id')->on('hairdressers')->nullable()->onUpdate("cascade")->onDelete("cascade");
 
             $table->unsignedBigInteger(('treatment_id'));
             $table->foreign('treatment_id')->references('id')->on('treatments');

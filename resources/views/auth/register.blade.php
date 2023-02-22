@@ -66,8 +66,8 @@
 
                             <div class="col-md-6">
                             <select id="rol" name="rol">
-                                <option>administrador</option>
-                                <option selected>gerente</option>                                
+                                <option>gerente</option>
+                                <option selected>recepcionista</option>                                
                             </select>
                             
                             </div>

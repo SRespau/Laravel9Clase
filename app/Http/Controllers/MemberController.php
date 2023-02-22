@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Member;
 use App\Models\MembersTreatment;
 use App\Models\Treatment;
+use App\Models\AestheticCenter;
+use App\Models\Hairdresser;
+use Carbon\Carbon;
 
 class MemberController extends Controller
 {
 
     public function __construct(){        
-               
+        $this->middleware("auth");      
     }
 
 
@@ -22,8 +25,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //$this->authorize("viewAny", Member::class);
-        $memberList = Member::all();
+        $this->authorize("viewAny", Member::class);
+        $memberList = Member::orderBy('nombre')->paginate(10);;
         return view("member.index", ["memberList"=>$memberList]);
     }
 
@@ -34,10 +37,13 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //$this->authorize("create", Member::class);
-        $treatments = Treatment::all();       
-        
-        return view("member.create", ["treatments"=>$treatments]);
+        $this->authorize("create", Member::class);
+        $treatments = Treatment::all();
+
+        $centros = Hairdresser::all();
+        $esteticas = AestheticCenter::all();
+
+        return view("member.create")->with("treatments", $treatments)->with("centros", $centros)->with("esteticas", $esteticas);
     }
 
     /**
@@ -62,7 +68,16 @@ class MemberController extends Controller
             "direccion.required" => "Debes rellenar el campo " . "'" . "direccion" . "'",
             "telefono.required" => "Debes rellenar el campo " . "'" . "telefono" . "'",
         ]);
-               
+        $fechaHoy = Carbon::now()->format('Y-m-d');
+        $treatments = Treatment::all();
+        $centros = Hairdresser::all();
+        $esteticas = AestheticCenter::all();
+        
+        
+        if($request->input("fecha") < $fechaHoy && $request->input("fecha") != null){
+            return view("member.create")->with("errores", "Fecha añadida no válida. Fecha anterior al día de hoy.")->with("treatments", $treatments)->with("centros", $centros)->with("esteticas", $esteticas);
+        }
+
         $member = new Member();
         $member->nombre = $request->input("nombre");
         $member->apellidos = $request->input("apellidos");
@@ -73,11 +88,24 @@ class MemberController extends Controller
         
         $lastMember = Member::latest("id")->first();
         
-        $membersTreatment = new MembersTreatment();
-        $membersTreatment->fecha = $request->input("fecha");
-        $membersTreatment->member_id = $lastMember["id"];
-        $membersTreatment->treatment_id = $request->input("treatment_id"); 
-        $membersTreatment->save();
+
+        if($request->input("center_id") != "--" && $request->input("treatment_id") != "--"){
+            $cita = new MembersTreatment();
+            $cita->fecha = $request->input("fecha");
+            $cita->member_id = $lastMember["id"];
+            $cita->treatment_id = $request->input("treatment_id"); 
+            
+            if(substr($request->input("center_id"), 0, 1) == "B") {
+                $cita->aesthetic_id =  $request->input("center_id");
+                $cita->hairdresser_id = null;
+            }else{
+                $cita->aesthetic_id =  null;
+                $cita->hairdresser_id = $request->input("center_id");
+            }
+            
+            $cita->save();
+        }
+        
 
         return redirect()->route("members.index")->with("exito", "Socio añadido correctamente");
 
@@ -92,7 +120,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = Member::find($id);
-        //$this->authorize("view", $member);
+        $this->authorize("view", $member);
         $dates = MembersTreatment::where("member_id", $id)->get();
         
         
@@ -121,7 +149,7 @@ class MemberController extends Controller
     public function edit($id)
     {
         $member = Member::find($id);
-        //$this->authorize("update", $member);
+        $this->authorize("update", $member);
         return view("member.edit", ["member" => $member]);
     }
 
@@ -149,7 +177,9 @@ class MemberController extends Controller
             "telefono.required" => "Debes rellenar el campo " . "'" . "telefono" . "'",
         ]);
         $member = Member::Find($id);
+        
         $this->authorize("update", $member);
+        
         $member->fill($request->all());
         $member->save();
         return redirect()->route("members.index")->with("exito", "Socio actualizado correctamente"); 
@@ -164,9 +194,10 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $member = Member::Find($id);
-       // $this->authorize("delete", $member);
+        
+        $this->authorize("delete", $member);
+        
         $member->delete();
         return redirect()->route("members.index")->with("exito", "Socio eliminado correctamente");
-
     }
 }
