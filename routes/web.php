@@ -9,6 +9,7 @@ use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\VideoclubController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductoController;
 
 //Prueba para cargar login de ui laravel en bootstrap
 Route::get('/', function () { 
@@ -117,6 +118,12 @@ Route::resource("clients", ClientController::class);
 
 //CONTROLADOR StudyController
 Route::resource("studies", StudyController::class);
+
+//Controlador para AJAX y enrutamiento
+Route::get("/productos/html", [ProductoController::class, "indexhtml"]); // indexhtml -> usa el metodo indexhtml del controlador
+// Route::get("/productos/json", [ProductoController::class, "indexjson"]);
+Route::resource("productos", ProductoController::class);
+
 
 
 
