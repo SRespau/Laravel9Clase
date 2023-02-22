@@ -49,11 +49,12 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        if ($user->id == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        // if ($user->id == 1) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        return true;
     }
 
     /**
@@ -71,11 +72,12 @@ class ProductPolicy
     }*/
     public function update(User $user, Product $product)
     {
-        if ($user->id == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        // if ($user->id == 1) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        return true;
     }
 
     /**
@@ -87,7 +89,8 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product)
     {
-        return $user->id == 1 ? true : false;
+        // return $user->id == 1 ? true : false;
+        return true;
     }
 
     //Regla personalizada. Ponemos que solamente el usuario "Eduardo" pueda cambiar el precio

@@ -68,7 +68,7 @@
                 console.log(id); //Comprobar que aparecen los datos en consola. Simplemente para ver que todo va bien
                 console.log(data[id]);
                 var tr = document.createElement("tr");
-                tr.setAttribute("id", `tr${data[id].id}`);
+                tr.setAttribute("id", `tr${data[id].id}`); //esta parte del codigo va si o si entre``. Mirar para ver que es
                 let fila ="<td>" + data[id].nombre + "</td>";
                 fila += "<td>" + data[id].descripcion + "</td>";
                 fila += "<td>" + data[id].precio + "</td>";

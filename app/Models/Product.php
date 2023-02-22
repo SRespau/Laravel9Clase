@@ -26,7 +26,7 @@ class Product extends Model
     }
 
     //Sintaxis nueva para laravel 9
-    protected function Nombre(): Attribute
+    protected function Nombre(): Attribute //nombre de la función -> nombre del campo de la tabla
     {
         return new Attribute(
             fn ($value) => strtoupper($value), // get (se ve en mayusculas cuando se pide)
