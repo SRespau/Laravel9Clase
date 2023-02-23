@@ -133,9 +133,8 @@ class MemberController extends Controller
         for($i = 0; $i < sizeof($treatments); $i++){
             $total += $treatments[$i][0]["precio"];
         }
-       
+           
         
-        //$treatments = Treatment::where("id", ->get();
 
         return view("member.show")->with("member", $member)->with("dates", $dates)->with("treatments", $treatments)->with("total", $total);
     }

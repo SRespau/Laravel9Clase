@@ -73,6 +73,15 @@
                     <td></td>
                     <td></td>
                     <td><a class="btn btn-primary" href="{{route('membersTreatments.edit', $dates[$i]->id)}}">Editar</a></td>
+                    <td>
+                        <form action="{{route('membersTreatments.destroy', $dates[$i]->id)}}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            @can("delete", $member)
+                            <button type="submit" onclick="return confirm('Confirmar eliminación')" class="btn btn-warning">Eliminar</button>
+                            @endcan
+                        </form>
+                    </td>
                     </tr>
                     @endfor
                     <tr>

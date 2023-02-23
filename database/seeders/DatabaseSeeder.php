@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             MemberSeeder::class,  
             AestheticSeeder::class,
             HairdresserSeeder::class,
-            TreatmentSeeder::class,                    
+            TreatmentSeeder::class,   
+            AestheticHairdresserTreatmentSeeder::class,                 
         ]);
     }
 }

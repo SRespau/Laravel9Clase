@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('aesthetic_hairdresser_treatment', function (Blueprint $table) {
             $table->id();
             
-            $table->string(('aesthetic_id'));
-            $table->foreign('aesthetic_id')->references('id')->on('aesthetic_centers')->nullable()->onUpdate("cascade")->onDelete("cascade");
+            $table->string('aesthetic_id')->nullable();
+            $table->foreign('aesthetic_id')->references('id')->on('aesthetic_centers')->nullable();
 
-            $table->string(('hairdresser_id'));
-            $table->foreign('hairdresser_id')->references('id')->on('hairdressers')->nullable()->onUpdate("cascade")->onDelete("cascade");
+            $table->string('hairdresser_id')->nullable();
+            $table->foreign('hairdresser_id')->references('id')->on('hairdressers')->nullable();
 
             $table->unsignedBigInteger(('treatment_id'));
             $table->foreign('treatment_id')->references('id')->on('treatments');

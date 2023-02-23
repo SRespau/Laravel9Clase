@@ -173,9 +173,6 @@ class MembersTreatmentController extends Controller
         $cita->save();
 
 
-        // $membersTreatment->fill($request->all());
-        // $membersTreatment->save();
-
         return redirect()->route("members.index")->with("exito", "Cita actualizado correctamente"); 
     }
 
@@ -187,6 +184,11 @@ class MembersTreatmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cita = MembersTreatment::Find($id);
+        
+        $this->authorize("delete", $cita);
+        
+        $cita->delete();
+        return redirect()->route("members.index")->with("exito", "Cita eliminada correctamente");
     }
 }

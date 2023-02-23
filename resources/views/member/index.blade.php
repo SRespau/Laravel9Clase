@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
 
             @if($message = Session::get("exito"))
             <div class="alert alert-success">
@@ -65,7 +65,7 @@
                 </tr>
                 @endforeach
             </table>
-            <div style="text-align:center;">{{ $memberList->links() }}</div>            
+           <!-- <div style="text-align:center;">{{ $memberList->links() }}</div>   -->         
             
         </div>
     </div>
