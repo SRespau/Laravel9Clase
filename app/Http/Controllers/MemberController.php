@@ -75,7 +75,7 @@ class MemberController extends Controller
         
         
         if($request->input("fecha") < $fechaHoy && $request->input("fecha") != null){
-            return view("member.create")->with("errores", "Fecha añadida no válida. Fecha anterior al día de hoy.")->with("treatments", $treatments)->with("centros", $centros)->with("esteticas", $esteticas);
+            return view("member.create")->with("errores", "Fecha añadida no válida. ")->with("treatments", $treatments)->with("centros", $centros)->with("esteticas", $esteticas);
         }
 
         $member = new Member();

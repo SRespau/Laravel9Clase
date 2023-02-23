@@ -84,7 +84,7 @@ class MembersTreatmentController extends Controller
         }
         $cita->save();
         
-        return redirect()->route("members.index")->with("exito", "Cita añadida correctamente");
+        return redirect()->route('members.show', $member->id)->with("exito", "Cita añadida correctamente");
     }
 
     /**

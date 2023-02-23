@@ -65,7 +65,7 @@
                 </tr>
                 @endforeach
             </table>
-           <!-- <div style="text-align:center;">{{ $memberList->links() }}</div>   -->         
+           <div>{{ $memberList->links('pagination::bootstrap-5') }}</div>        
             
         </div>
     </div>
