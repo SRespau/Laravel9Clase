@@ -12,7 +12,7 @@ class MemberPolicy
 
     /**
      * Determine whether the user can view any models.
-     *
+     * Solamente los usuarios administradores podrán ver esta vista
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
@@ -61,7 +61,7 @@ class MemberPolicy
 
     /**
      * Determine whether the user can delete the model.
-     *
+     * Solamente los usuaros administradores "gerentes" podrán usar este método del controlador
      * @param  \App\Models\User  $user
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Auth\Access\Response|bool
@@ -71,7 +71,7 @@ class MemberPolicy
         return $user->rol == "gerente" ? true : false;
     }
 
-
+    //Solamente los usuaros administradores "gerentes" podrán usar este método del controlador
     public function historico(User $user){
         return $user->rol == "gerente" ? true : false;
     }

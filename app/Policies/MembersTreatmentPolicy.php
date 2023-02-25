@@ -10,6 +10,7 @@ class MembersTreatmentPolicy
 {
     use HandlesAuthorization;
 
+    
     /**
      * Determine whether the user can view any models.
      *
@@ -61,7 +62,7 @@ class MembersTreatmentPolicy
 
     /**
      * Determine whether the user can delete the model.
-     *
+     * Solamente los usuaros administradores "gerentes" podrán usar este método del controlador
      * @param  \App\Models\User  $user
      * @param  \App\Models\membersTreatment  $membersTreatment
      * @return \Illuminate\Auth\Access\Response|bool

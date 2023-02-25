@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return print("esto es el index de usuarios");
+        //
     }
 
     /**
@@ -71,7 +71,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id); 
-        $user->nombre = $request->input("name"); //atributo "nombre" del input del formulario
+        $user->nombre = $request->input("name");
         $user->descripcion = $request->input("email");
         $user->save();
     }

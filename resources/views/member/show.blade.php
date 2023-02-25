@@ -67,7 +67,7 @@
                 <tr>
                     <th>Tratamiento</th>
                     <th>Fecha</th>
-                    <th></th>
+                    <th>Precio</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -77,7 +77,7 @@
                 @for ($i = 0; $i < sizeof($dates); $i++) <tr>
                     <td>{{ $treatments[$i][0] -> nombre}}</td>
                     <td>{{ $dates[$i]->fecha }}</td>
-                    <td></td>
+                    <td>{{ $treatments[$i][0]->precio }} {{"€"}}</td>
                     <td></td>
                     <td><a class="btn btn-primary" href="{{route('membersTreatments.edit', $dates[$i]->id)}}">Editar</a></td>
                     <td>
@@ -93,7 +93,7 @@
                     @endfor
                     <tr>
                         <td><b>TOTAL</b></td>
-                        <td>{{ $total }}{{"€"}}</td>
+                        <td>{{ $total }} {{"€"}}</td>
                     </tr>
             </table>
             @endcan

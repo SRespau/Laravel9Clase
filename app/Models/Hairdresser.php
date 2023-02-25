@@ -10,6 +10,7 @@ class Hairdresser extends Model
     use HasFactory;
     protected $fillable = ["nif", "nombre", "razon_social", "direccion", "email", "telefono", "unisex", "maximo_personas"];
     
+    //Estas 3 variables sirven para cambiar la id principal en laravel por string, en vez de int que coge por defecto
     protected $primaryKey = 'id';
 
     public $incrementing = false;
